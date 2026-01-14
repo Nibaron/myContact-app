@@ -9,7 +9,13 @@ const getContacts = (req, res) => {
 //@route POST /api/contacts
 //@access public
 const createContact = (req, res) => {
-    res.status(201).json({ message: "contact created" });
+    console.log(req.body);
+    const { name, age } = req.body;
+    if (!name || !age) {
+        res.status(400);
+        throw new Error("All fields are mandatory!");
+    }
+    res.status(201).json({ message: `contact created with the name of ${name}` });
 };
 
 //@desc get contact by id
